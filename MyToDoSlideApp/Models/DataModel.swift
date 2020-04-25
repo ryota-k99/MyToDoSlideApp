@@ -28,3 +28,7 @@ class LifeDataModel: Object{
 class BookDataModel: Object{
    @objc dynamic var bookTitle = ""
 }
+
+class MemoDataModel: Object{
+   @objc dynamic var memoTitle = ""
+}

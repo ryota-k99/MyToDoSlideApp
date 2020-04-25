@@ -24,8 +24,9 @@ class LifeTableViewController: UITableViewController,SegementSlideContentScrollV
         
         let realm = try! Realm()
 
-        let DayThing = LifeDataModel()
         self.LifeToDoArray = realm.objects(LifeDataModel.self)
+        tableView.backgroundColor = .white
+        tableView.sectionHeaderHeight = 50
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +59,8 @@ class LifeTableViewController: UITableViewController,SegementSlideContentScrollV
         let item:LifeDataModel = self.LifeToDoArray[indexPath.row]
         
         cell.textLabel?.text = item.lifeToDoThing
+        cell.backgroundColor = .white
+        cell.textLabel?.textColor = .black
         
         return cell
     }
@@ -67,6 +70,29 @@ class LifeTableViewController: UITableViewController,SegementSlideContentScrollV
         plusButtonView.addTarget(self, action: #selector(pushButton), for: .touchUpInside)
         
         return plusButtonView
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        let alert = UIAlertController(title: "完了しましたか？", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "完了", style: .default){(action)in
+            
+            if let item: LifeDataModel = self.LifeToDoArray[indexPath.row]{
+                do{
+                    try self.realm.write {
+                        self.realm.delete(item)
+                        self.tableView.reloadData()
+                    }
+                }catch{
+                    print(error)
+                }
+            }
+        }
+        let cancelButton = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(action)
+        alert.addAction(cancelButton)
+        present(alert,animated: true,completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -104,15 +130,16 @@ class LifeTableViewController: UITableViewController,SegementSlideContentScrollV
             self.tableView.reloadData()
 
         }
+        let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
         
         alert.addTextField{(alertTextField)in
             alertTextField.placeholder = "Create"
             textField = alertTextField
             
         }
-        
-        
+    
         alert.addAction(action)
+        alert.addAction(cancelButton)
         present(alert,animated: true,completion: nil)
     }
 

@@ -12,11 +12,11 @@ class ButtonView{
     
     func PlusButtonView() -> UIButton{
         let button:UIButton = UIButton()
-        button.backgroundColor = .black
-        button.setTitle("sample", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .black
-        
+        button.backgroundColor = .white
+        button.setTitle("項目を追加する", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.layer.borderColor = UIColor.blue.cgColor
+        button.layer.borderWidth = 1.0
         return button
  
     }

@@ -21,6 +21,7 @@
 		A38F81E52453DC3300AD339D /* YearTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38F81E42453DC3300AD339D /* YearTableViewController.swift */; };
 		A38F81E72453DC4400AD339D /* LifeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38F81E62453DC4400AD339D /* LifeTableViewController.swift */; };
 		A38F81E92453DC4E00AD339D /* BookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38F81E82453DC4E00AD339D /* BookTableViewController.swift */; };
+		A38F81EB2453F34D00AD339D /* MemoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38F81EA2453F34D00AD339D /* MemoTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		A38F81E42453DC3300AD339D /* YearTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearTableViewController.swift; sourceTree = "<group>"; };
 		A38F81E62453DC4400AD339D /* LifeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeTableViewController.swift; sourceTree = "<group>"; };
 		A38F81E82453DC4E00AD339D /* BookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewController.swift; sourceTree = "<group>"; };
+		A38F81EA2453F34D00AD339D /* MemoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				A38F81E42453DC3300AD339D /* YearTableViewController.swift */,
 				A38F81E62453DC4400AD339D /* LifeTableViewController.swift */,
 				A38F81E82453DC4E00AD339D /* BookTableViewController.swift */,
+				A38F81EA2453F34D00AD339D /* MemoTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				A3876988244E63D9007CE0CF /* MainViewController.swift in Sources */,
 				A3876984244E63D9007CE0CF /* AppDelegate.swift in Sources */,
 				A3876986244E63D9007CE0CF /* SceneDelegate.swift in Sources */,
+				A38F81EB2453F34D00AD339D /* MemoTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

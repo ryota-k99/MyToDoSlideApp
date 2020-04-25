@@ -24,6 +24,8 @@ class MonthTableViewController: UITableViewController,SegementSlideContentScroll
         
         let realm = try! Realm()
         self.MonthToDoArray = realm.objects(MonthDataModel.self)
+        tableView.backgroundColor = .white
+        tableView.sectionHeaderHeight = 50
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +58,8 @@ class MonthTableViewController: UITableViewController,SegementSlideContentScroll
         let item:MonthDataModel = self.MonthToDoArray[indexPath.row]
         
         cell.textLabel?.text = item.monthToDoThing
+        cell.backgroundColor = .white
+        cell.textLabel?.textColor = .black
         print(item.monthToDoThing)
         
         return cell
@@ -67,6 +71,29 @@ class MonthTableViewController: UITableViewController,SegementSlideContentScroll
         plusButtonView.addTarget(self, action: #selector(pushButton), for: .touchUpInside)
         
         return plusButtonView
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        let alert = UIAlertController(title: "完了しましたか？", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "完了", style: .default){(action)in
+            
+            if let item: MonthDataModel = self.MonthToDoArray[indexPath.row]{
+                do{
+                    try self.realm.write {
+                        self.realm.delete(item)
+                        self.tableView.reloadData()
+                    }
+                }catch{
+                    print(error)
+                }
+            }
+        }
+        let cancelButton = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(action)
+        alert.addAction(cancelButton)
+        present(alert,animated: true,completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -110,9 +137,11 @@ class MonthTableViewController: UITableViewController,SegementSlideContentScroll
             textField = alertTextField
             
         }
+        let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
         
         
         alert.addAction(action)
+        alert.addAction(cancelButton)
         present(alert,animated: true,completion: nil)
     }
 

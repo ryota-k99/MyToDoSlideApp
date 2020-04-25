@@ -10,9 +10,9 @@ import UIKit
 import RealmSwift
 import SegementSlide
 
-class DayTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate {
+class MemoTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate {
     
-    var DayToDoArray: Results<DayDataModel>!
+    var MemoArray: Results<MemoDataModel>!
     let buttonView = ButtonView()
     
     let realm = try! Realm()
@@ -23,7 +23,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         let height:CGFloat = self.view.bounds.height
         
         let realm = try! Realm()
-        self.DayToDoArray = realm.objects(DayDataModel.self)
+        self.MemoArray = realm.objects(MemoDataModel.self)
         tableView.backgroundColor = .white
         tableView.sectionHeaderHeight = 50
 
@@ -34,6 +34,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         
         self.tableView.reloadData()
     }
+    
     
     @objc var scrollView: UIScrollView{
           return tableView
@@ -48,44 +49,29 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return DayToDoArray.count
+        return MemoArray.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-        let item:DayDataModel = self.DayToDoArray[indexPath.row]
         
-        cell.textLabel?.text = item.dayToDoThing
+        let item:MemoDataModel = self.MemoArray[indexPath.row]
+        
+        cell.textLabel?.text = item.memoTitle
         cell.backgroundColor = .white
         cell.textLabel?.textColor = .black
-        print(item.dayToDoThing)
+        print(item.memoTitle)
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let plusButtonView = buttonView.PlusButtonView()
         plusButtonView.addTarget(self, action: #selector(pushButton), for: .touchUpInside)
         
         return plusButtonView
     }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-       if editingStyle == .delete{
-           if let item: DayDataModel = DayToDoArray[indexPath.row]{
-               do{
-                   try realm.write {
-                       realm.delete(item)
-                       self.tableView.reloadData()
-                   }
-               }catch{
-                   print(error)
-               }
-           }
-       }
-   }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -93,7 +79,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         let alert = UIAlertController(title: "完了しましたか？", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "完了", style: .default){(action)in
             
-            if let item: DayDataModel = self.DayToDoArray[indexPath.row]{
+            if let item: MemoDataModel = self.MemoArray[indexPath.row]{
                 do{
                     try self.realm.write {
                         self.realm.delete(item)
@@ -110,6 +96,21 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         present(alert,animated: true,completion: nil)
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+       if editingStyle == .delete{
+           if let item: MemoDataModel = MemoArray[indexPath.row]{
+               do{
+                   try realm.write {
+                       realm.delete(item)
+                       self.tableView.reloadData()
+                   }
+               }catch{
+                   print(error)
+               }
+           }
+       }
+   }
+    
     @objc func pushButton(sender: UIButton){
         var textField = UITextField()
         
@@ -117,9 +118,9 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         
         let action = UIAlertAction(title: "Add", style: .default){(action)in
             
-            let toDoData: DayDataModel = DayDataModel()
+            let toDoData: MemoDataModel = MemoDataModel()
             
-            toDoData.dayToDoThing = textField.text!
+            toDoData.memoTitle = textField.text!
             
             let realmData = try! Realm()
             
@@ -130,6 +131,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
             self.tableView.reloadData()
 
         }
+        
         let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
         
         alert.addTextField{(alertTextField)in
@@ -137,6 +139,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
             textField = alertTextField
             
         }
+        
         
         alert.addAction(action)
         alert.addAction(cancelButton)

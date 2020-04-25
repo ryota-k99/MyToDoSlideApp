@@ -36,7 +36,7 @@ class MainViewController: SegementSlideViewController {
     }
     
     override var titlesInSwitcher: [String]{
-        return ["DAY","MONTH","YEAR","LIFE","BOOK"]
+        return ["DAY","MONTH","YEAR","LIFE","BOOK","MEMO"]
     }
     
     override func segementSlideContentScrollView(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -51,6 +51,8 @@ class MainViewController: SegementSlideViewController {
             return LifeTableViewController()
         case 4:
             return BookTableViewController()
+        case 5:
+            return MemoTableViewController()
         default:
             return DayTableViewController()
         }

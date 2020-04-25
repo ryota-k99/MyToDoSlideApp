@@ -24,6 +24,8 @@ class BookTableViewController: UITableViewController,SegementSlideContentScrollV
         
         let realm = try! Realm()
         self.BookArray = realm.objects(BookDataModel.self)
+        tableView.backgroundColor = .white
+        tableView.sectionHeaderHeight = 50
 
     }
     
@@ -57,6 +59,8 @@ class BookTableViewController: UITableViewController,SegementSlideContentScrollV
         let item:BookDataModel = self.BookArray[indexPath.row]
         
         cell.textLabel?.text = item.bookTitle
+        cell.backgroundColor = .white
+        cell.textLabel?.textColor = .black
         print(item.bookTitle)
         
         return cell
@@ -67,6 +71,29 @@ class BookTableViewController: UITableViewController,SegementSlideContentScrollV
         plusButtonView.addTarget(self, action: #selector(pushButton), for: .touchUpInside)
         
         return plusButtonView
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        let alert = UIAlertController(title: "完了しましたか？", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "完了", style: .default){(action)in
+            
+            if let item: BookDataModel = self.BookArray[indexPath.row]{
+                do{
+                    try self.realm.write {
+                        self.realm.delete(item)
+                        self.tableView.reloadData()
+                    }
+                }catch{
+                    print(error)
+                }
+            }
+        }
+        let cancelButton = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(action)
+        alert.addAction(cancelButton)
+        present(alert,animated: true,completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -105,6 +132,8 @@ class BookTableViewController: UITableViewController,SegementSlideContentScrollV
 
         }
         
+        let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
+        
         alert.addTextField{(alertTextField)in
             alertTextField.placeholder = "Create"
             textField = alertTextField
@@ -113,6 +142,7 @@ class BookTableViewController: UITableViewController,SegementSlideContentScrollV
         
         
         alert.addAction(action)
+        alert.addAction(cancelButton)
         present(alert,animated: true,completion: nil)
     }
 
