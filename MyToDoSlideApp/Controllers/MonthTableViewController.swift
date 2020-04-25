@@ -10,9 +10,9 @@ import UIKit
 import RealmSwift
 import SegementSlide
 
-class DayTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate {
+class MonthTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate {
     
-    var DayToDoArray: Results<DayDataModel>!
+    var MonthToDoArray: Results<MonthDataModel>!
     let buttonView = ButtonView()
     
     let realm = try! Realm()
@@ -23,8 +23,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         let height:CGFloat = self.view.bounds.height
         
         let realm = try! Realm()
-        self.DayToDoArray = realm.objects(DayDataModel.self)
-
+        self.MonthToDoArray = realm.objects(MonthDataModel.self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +31,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         
         self.tableView.reloadData()
     }
+    
     
     @objc var scrollView: UIScrollView{
           return tableView
@@ -46,17 +46,17 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return DayToDoArray.count
+        return MonthToDoArray.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         
-        let item:DayDataModel = self.DayToDoArray[indexPath.row]
+        let item:MonthDataModel = self.MonthToDoArray[indexPath.row]
         
-        cell.textLabel?.text = item.dayToDoThing
-        print(item.dayToDoThing)
+        cell.textLabel?.text = item.monthToDoThing
+        print(item.monthToDoThing)
         
         return cell
     }
@@ -71,7 +71,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
        if editingStyle == .delete{
-           if let item: DayDataModel = DayToDoArray[indexPath.row]{
+           if let item: MonthDataModel = MonthToDoArray[indexPath.row]{
                do{
                    try realm.write {
                        realm.delete(item)
@@ -91,9 +91,9 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         
         let action = UIAlertAction(title: "Add", style: .default){(action)in
             
-            let toDoData: DayDataModel = DayDataModel()
+            let toDoData: MonthDataModel = MonthDataModel()
             
-            toDoData.dayToDoThing = textField.text!
+            toDoData.monthToDoThing = textField.text!
             
             let realmData = try! Realm()
             

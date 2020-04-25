@@ -9,10 +9,22 @@
 import Foundation
 import RealmSwift
 
-class DataModel: Object{
+class DayDataModel: Object{
     @objc dynamic var dayToDoThing = ""
+}
+
+class MonthDataModel: Object{
     @objc dynamic var monthToDoThing = ""
-    @objc dynamic var yearToDoThing = ""
+}
+
+class YearDataModel: Object{
+   @objc dynamic var yearToDoThing = ""
+}
+
+class LifeDataModel: Object{
     @objc dynamic var lifeToDoThing = ""
-    @objc dynamic var bookTitle = ""
+}
+
+class BookDataModel: Object{
+   @objc dynamic var bookTitle = ""
 }

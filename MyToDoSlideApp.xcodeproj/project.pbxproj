@@ -17,6 +17,10 @@
 		A387698D244E63DA007CE0CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A387698C244E63DA007CE0CF /* Assets.xcassets */; };
 		A3876990244E63DA007CE0CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A387698E244E63DA007CE0CF /* LaunchScreen.storyboard */; };
 		A387699B244E6FC3007CE0CF /* DayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A387699A244E6FC3007CE0CF /* DayTableViewController.swift */; };
+		A38F81E32453DC2700AD339D /* MonthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38F81E22453DC2700AD339D /* MonthTableViewController.swift */; };
+		A38F81E52453DC3300AD339D /* YearTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38F81E42453DC3300AD339D /* YearTableViewController.swift */; };
+		A38F81E72453DC4400AD339D /* LifeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38F81E62453DC4400AD339D /* LifeTableViewController.swift */; };
+		A38F81E92453DC4E00AD339D /* BookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38F81E82453DC4E00AD339D /* BookTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		A387698F244E63DA007CE0CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3876991244E63DA007CE0CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A387699A244E6FC3007CE0CF /* DayTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTableViewController.swift; sourceTree = "<group>"; };
+		A38F81E22453DC2700AD339D /* MonthTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTableViewController.swift; sourceTree = "<group>"; };
+		A38F81E42453DC3300AD339D /* YearTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearTableViewController.swift; sourceTree = "<group>"; };
+		A38F81E62453DC4400AD339D /* LifeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeTableViewController.swift; sourceTree = "<group>"; };
+		A38F81E82453DC4E00AD339D /* BookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +98,10 @@
 			children = (
 				A3876987244E63D9007CE0CF /* MainViewController.swift */,
 				A387699A244E6FC3007CE0CF /* DayTableViewController.swift */,
+				A38F81E22453DC2700AD339D /* MonthTableViewController.swift */,
+				A38F81E42453DC3300AD339D /* YearTableViewController.swift */,
+				A38F81E62453DC4400AD339D /* LifeTableViewController.swift */,
+				A38F81E82453DC4E00AD339D /* BookTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -239,9 +251,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A38F81E92453DC4E00AD339D /* BookTableViewController.swift in Sources */,
+				A38F81E52453DC3300AD339D /* YearTableViewController.swift in Sources */,
 				A3782CEB2452B23F00EA959F /* ButtonView.swift in Sources */,
 				A3782CE92452A80B00EA959F /* DataModel.swift in Sources */,
+				A38F81E72453DC4400AD339D /* LifeTableViewController.swift in Sources */,
 				A387699B244E6FC3007CE0CF /* DayTableViewController.swift in Sources */,
+				A38F81E32453DC2700AD339D /* MonthTableViewController.swift in Sources */,
 				A3876988244E63D9007CE0CF /* MainViewController.swift in Sources */,
 				A3876984244E63D9007CE0CF /* AppDelegate.swift in Sources */,
 				A3876986244E63D9007CE0CF /* SceneDelegate.swift in Sources */,

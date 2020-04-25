@@ -10,11 +10,14 @@ import UIKit
 class ButtonView{
     
     
-    func PlusButtonView(width: CGFloat ,height: CGFloat){
-        let button:UIButton = UIButton(frame: CGRect(x: 0, y: 50, width: width, height: height / 4))
+    func PlusButtonView() -> UIButton{
+        let button:UIButton = UIButton()
         button.backgroundColor = .black
         button.setTitle("sample", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
+        
+        return button
  
     }
     

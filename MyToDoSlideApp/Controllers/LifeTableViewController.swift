@@ -10,9 +10,9 @@ import UIKit
 import RealmSwift
 import SegementSlide
 
-class DayTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate {
+class LifeTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate {
     
-    var DayToDoArray: Results<DayDataModel>!
+    var LifeToDoArray: Results<LifeDataModel>!
     let buttonView = ButtonView()
     
     let realm = try! Realm()
@@ -23,8 +23,9 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         let height:CGFloat = self.view.bounds.height
         
         let realm = try! Realm()
-        self.DayToDoArray = realm.objects(DayDataModel.self)
 
+        let DayThing = LifeDataModel()
+        self.LifeToDoArray = realm.objects(LifeDataModel.self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +33,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         
         self.tableView.reloadData()
     }
+    
     
     @objc var scrollView: UIScrollView{
           return tableView
@@ -46,23 +48,21 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return DayToDoArray.count
+        return LifeToDoArray.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         
-        let item:DayDataModel = self.DayToDoArray[indexPath.row]
+        let item:LifeDataModel = self.LifeToDoArray[indexPath.row]
         
-        cell.textLabel?.text = item.dayToDoThing
-        print(item.dayToDoThing)
+        cell.textLabel?.text = item.lifeToDoThing
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let plusButtonView = buttonView.PlusButtonView()
         plusButtonView.addTarget(self, action: #selector(pushButton), for: .touchUpInside)
         
@@ -71,7 +71,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
        if editingStyle == .delete{
-           if let item: DayDataModel = DayToDoArray[indexPath.row]{
+           if let item: LifeDataModel = LifeToDoArray[indexPath.row]{
                do{
                    try realm.write {
                        realm.delete(item)
@@ -91,9 +91,9 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         
         let action = UIAlertAction(title: "Add", style: .default){(action)in
             
-            let toDoData: DayDataModel = DayDataModel()
+            let toDoData: LifeDataModel = LifeDataModel()
             
-            toDoData.dayToDoThing = textField.text!
+            toDoData.lifeToDoThing = textField.text!
             
             let realmData = try! Realm()
             

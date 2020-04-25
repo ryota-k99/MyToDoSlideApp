@@ -14,7 +14,7 @@ class MainViewController: SegementSlideViewController {
         
         reloadData()
         scrollToSlide(at: 0, animated: true)
-        
+
         
     }
     
@@ -26,9 +26,9 @@ class MainViewController: SegementSlideViewController {
         
         let headerViewHeight:CGFloat
         if #available(iOS 11.0,*){
-            headerViewHeight = view.bounds.height/3 + view.safeAreaInsets.top
+            headerViewHeight = view.bounds.height/4 + view.safeAreaInsets.top
         }else{
-            headerViewHeight = view.bounds.height/3 + topLayoutGuide.length
+            headerViewHeight = view.bounds.height/4 + topLayoutGuide.length
         }
         
         headerView.heightAnchor.constraint(equalToConstant: headerViewHeight).isActive = true
@@ -42,11 +42,20 @@ class MainViewController: SegementSlideViewController {
     override func segementSlideContentScrollView(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         switch index {
         case 0:
-            return DayTableViewController() as! SegementSlideContentScrollViewDelegate
+            return DayTableViewController()
+        case 1:
+            return MonthTableViewController()
+        case 2:
+            return YearTableViewController()
+        case 3:
+            return LifeTableViewController()
+        case 4:
+            return BookTableViewController()
         default:
-            return DayTableViewController() as! SegementSlideContentScrollViewDelegate
+            return DayTableViewController()
         }
     }
+
 
 
 }

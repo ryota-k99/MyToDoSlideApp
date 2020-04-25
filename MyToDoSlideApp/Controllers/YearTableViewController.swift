@@ -10,9 +10,9 @@ import UIKit
 import RealmSwift
 import SegementSlide
 
-class DayTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate {
+class YearTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate {
     
-    var DayToDoArray: Results<DayDataModel>!
+    var YearToDoArray: Results<YearDataModel>!
     let buttonView = ButtonView()
     
     let realm = try! Realm()
@@ -23,8 +23,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         let height:CGFloat = self.view.bounds.height
         
         let realm = try! Realm()
-        self.DayToDoArray = realm.objects(DayDataModel.self)
-
+        self.YearToDoArray = realm.objects(YearDataModel.self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,23 +45,22 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return DayToDoArray.count
+        return YearToDoArray.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         
-        let item:DayDataModel = self.DayToDoArray[indexPath.row]
+        let item:YearDataModel = self.YearToDoArray[indexPath.row]
         
-        cell.textLabel?.text = item.dayToDoThing
-        print(item.dayToDoThing)
+        cell.textLabel?.text = item.yearToDoThing
+        print(item.yearToDoThing)
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let plusButtonView = buttonView.PlusButtonView()
         plusButtonView.addTarget(self, action: #selector(pushButton), for: .touchUpInside)
         
@@ -71,7 +69,7 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
        if editingStyle == .delete{
-           if let item: DayDataModel = DayToDoArray[indexPath.row]{
+           if let item: YearDataModel = YearToDoArray[indexPath.row]{
                do{
                    try realm.write {
                        realm.delete(item)
@@ -91,9 +89,9 @@ class DayTableViewController: UITableViewController,SegementSlideContentScrollVi
         
         let action = UIAlertAction(title: "Add", style: .default){(action)in
             
-            let toDoData: DayDataModel = DayDataModel()
+            let toDoData: YearDataModel = YearDataModel()
             
-            toDoData.dayToDoThing = textField.text!
+            toDoData.yearToDoThing = textField.text!
             
             let realmData = try! Realm()
             
